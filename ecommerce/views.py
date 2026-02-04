@@ -10,7 +10,7 @@ class LoginView(APIView):
         username=request.data.get("username")
         password=request.data.get('password')
         if not username or password:
-        authenticate(username=username,password=password)
-        return Response({"message":"Authenticate successful"})
+            authenticate(username=username,password=password)
+            return Response({"message":"Authenticate successful"})
         return Response({"message":f"error {e} "})
 

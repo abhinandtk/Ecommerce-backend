@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import LoginView
+from .views import SyncUserView
 
 urlpatterns = [
-    path('login/',LoginView.as_view(),name="login")
+    path('auth/sync-user/',SyncUserView.as_view(),name="sync_user")
 ]

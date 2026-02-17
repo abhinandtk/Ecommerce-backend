@@ -1,8 +1,11 @@
 from django.contrib import admin
-from .models import User,Product,ProductVariant
+from .models import User, Product, ProductVariant, Size, Color
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
+admin.site.register(Size)
+admin.site.register(Color)
+
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     model=User
@@ -29,6 +32,7 @@ class CustomUserAdmin(UserAdmin):
 class ProductVariantInline(admin.TabularInline):
     model = ProductVariant
     extra = 1
+    filter_horizontal = ("sizes", "colors")
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -48,3 +52,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ("is_active",)
     search_fields = ("name",)
     inlines=[ProductVariantInline]
+
+@admin.register(ProductVariant)
+class ProductVariantAdmin(admin.ModelAdmin):
+    list_display = ("product", "price", "stock", "is_active")
+    filter_horizontal = ("sizes", "colors")

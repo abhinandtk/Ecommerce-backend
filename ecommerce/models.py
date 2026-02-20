@@ -34,8 +34,8 @@ class ProductVariant(models.Model):
         related_name="variants",
         on_delete=models.CASCADE
     )
-    sizes = models.ManyToManyField(Size, related_name="variants", blank=True)
-    colors = models.ManyToManyField(Color, related_name="variants", blank=True)
+    sizes = models.ForeignKey(Size,on_delete=models.SET_NULL, related_name="variants",null=True, blank=True)
+    colors = models.ForeignKey(Color,on_delete=models.SET_NULL, related_name="variants",null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)

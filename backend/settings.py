@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'ecommerce',
-    'corsheaders'
+    'corsheaders',
+   
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,30 @@ STATIC_URL = 'static/'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "My Admin",
+    "site_header": "My Project",
+    "site_brand": "My Brand",
+    "welcome_sign": "Welcome to the Dashboard",
+    "copyright": "My Company",
+
+  
+
+    # Sidebar
+    "show_sidebar": True,
+    "navigation_expanded": True,
+ "related_modal_active": False,  # Change this from True to False
+   
+
+    # Icons (FontAwesome)
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+
+    # UI Tweaks
+    "show_ui_builder": True,
+}
+

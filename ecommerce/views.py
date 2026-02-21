@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from rest_framework.viewsets import ModelViewSet
+from .models import *
+from .serializers import *
 
 # Create your views here.
 
@@ -28,3 +30,6 @@ class SyncUserView(APIView):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+class ProductViewSet(ModelViewSet):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer

@@ -6,8 +6,16 @@ class User(AbstractUser):
     dob = models.DateField(null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     phone = models.CharField(max_length=15, blank=True)
+    is_vendor=models.BooleanField(default=False)
+
+class Shop(models.Model):
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Product(models.Model):
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="products")
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     image = models.URLField(max_length=500, null=True, blank=True)
@@ -45,3 +53,17 @@ class ProductVariant(models.Model):
 
     def __str__(self):
         return f"{self.product.name} Variant"
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    status = models.CharField(max_length=20, default="ACTIVE")  # ACTIVE/CHECKED_OUT
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
+    product_variant = models.ForeignKey(ProductVariant, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        unique_together = ("cart", "product_variant")

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Product, ProductVariant, Size, Color
+from .models import User, Product, ProductVariant, Size, Color,Shop
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -15,3 +15,7 @@ class ProductVariantAdmmin(admin.StackedInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines=[ProductVariantAdmmin]
+
+@admin.register(Shop)
+class ShopAdmin(admin.ModelAdmin):
+    pass

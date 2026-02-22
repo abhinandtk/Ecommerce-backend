@@ -55,8 +55,20 @@ class ProductVariant(models.Model):
         return f"{self.product.name} Variant"
 
 class Cart(models.Model):
+    class Status(models.TextChoices):
+        ACTIVE = "ACTIVE", "Active"
+        CHECKOUT_INITIATED = "CHECKOUT_INITIATED", "Checkout Initiated"
+        PAYMENT_PENDING = "PAYMENT_PENDING", "Payment Pending"
+        CHECKED_OUT = "CHECKED_OUT", "Checked Out"
+        PAYMENT_FAILED = "PAYMENT_FAILED", "Payment Failed"
+        CANCELLED = "CANCELLED", "Cancelled"
+        EXPIRED = "EXPIRED", "Expired"
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    status = models.CharField(max_length=20, default="ACTIVE")  # ACTIVE/CHECKED_OUT
+    status = models.CharField(
+        max_length=30,
+        choices=Status.choices,
+        default=Status.ACTIVE
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Product, ProductVariant, Size, Color,Shop
+from .models import User, Product, ProductVariant, Size, Color,Shop,Cart,CartItem
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -18,4 +18,12 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Shop)
 class ShopAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
     pass

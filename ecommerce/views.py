@@ -9,6 +9,7 @@ from .models import *
 from .serializers import *
 from django.db import transaction
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
 
 # Create your views here.
 
@@ -36,7 +37,7 @@ class ProductViewSet(ModelViewSet):
     queryset=Product.objects.all()
     serializer_class=ProductSerializer
 
-from rest_framework.decorators import action
+
 
 class CartViewSet(ViewSet):
     permission_classes=[IsAuthenticated]
